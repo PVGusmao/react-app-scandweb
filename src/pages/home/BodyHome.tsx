@@ -8,10 +8,8 @@ export function BodyHome() {
   const { data } = useContext(MyContext) as IMyContext;
 
   return (
-    <div>
-      <div style={{
-        display: 'flex',
-      }}>
+    <div className="sm:h-screen">
+      <div className="sm:flex sm:flex-wrap">
         {
           data.length > 0 && data?.map((element: IData, index:number) => (
             <CardProduct

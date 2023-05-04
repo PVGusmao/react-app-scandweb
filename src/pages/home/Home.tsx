@@ -31,7 +31,7 @@ export function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="sm:flex sm:flex-col sm:h-[100vh] sm:w-[1280px]">
       <HeaderHome />
 
       <BodyHome />
