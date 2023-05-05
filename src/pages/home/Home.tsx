@@ -5,7 +5,6 @@ import axios from "axios";
 
 import { BodyHome } from "./BodyHome";
 import { HeaderHome } from "./HeaderHome";
-import { FooterHome } from "./FooterHome";
 
 export interface IData {
   id: number,
@@ -31,12 +30,10 @@ export function Home() {
   }, []);
 
   return (
-    <div className="sm:flex sm:flex-col sm:h-[100vh] sm:w-[1280px]">
+    <div className="sm:flex sm:flex-col sm:w-[1280px]">
       <HeaderHome />
 
       <BodyHome />
-
-      <FooterHome />
     </div>
   )
 }

@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
-export function HeaderHome() {
+export function HeaderAddProduct() {
   const navigation = useNavigate();
   console.log(navigation);
   return (
@@ -26,7 +26,7 @@ export function HeaderHome() {
             sm:active:shadow-none"
           type="button"
           onClick={() => {
-            navigation('Add');
+            navigation('AddProduct');
           }}
         >Add</button>
 
