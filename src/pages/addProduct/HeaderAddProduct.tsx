@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { IMyContext, MyContext } from "../../context/MyContext";
 
 export function HeaderAddProduct() {
+  const {sku, name, price, attribute} = useContext(MyContext) as IMyContext;
+
   const navigation = useNavigate();
-  console.log(navigation);
+
   return (
     <div className="sm:flex sm:items-center sm:justify-between sm:m-[20px] sm:p-[20px] sm:border-b-[1px] sm:border-b-black">
       <div>
@@ -26,9 +30,10 @@ export function HeaderAddProduct() {
             sm:active:shadow-none"
           type="button"
           onClick={() => {
-            navigation('AddProduct');
+            // navigation('AddProduct');
+            console.log(attribute);
           }}
-        >Add</button>
+        >Save</button>
 
         <button
           id="delete-product-btn"
@@ -42,7 +47,7 @@ export function HeaderAddProduct() {
             sm:shadow-black
             sm:active:shadow-none"
           type="button"
-        >Mass Delete</button>
+        >Cancel</button>
       </div>
     </div>
   )
