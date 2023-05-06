@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { IMyContext, MyContext } from "../../context/MyContext";
 import { CardProduct } from "../../components/CardProduct/CardProdcut";
+
 import { IData } from "./Home";
 
 export function BodyHome() {

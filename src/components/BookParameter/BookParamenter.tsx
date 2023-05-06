@@ -1,14 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { IMyContext, MyContext } from "../../context/MyContext"
 
-export interface IBookattribute {
-  weight: string;
-}
-
 export function BookParameter() {
   const [weight, setWeight] = useState('');
 
-  const {attribute, setAttribute } = useContext(MyContext) as IMyContext;
+  const {setAttribute } = useContext(MyContext) as IMyContext;
 
   useEffect(() => {
     setAttribute({ weight });
@@ -23,6 +19,7 @@ export function BookParameter() {
         name="weight"
         value={weight} 
         onChange={(e) => setWeight(e.target.value)}
+        minLength={3}
     />
 
       <p className="sm:text-[12px] sm:mb-[10px] sm:text-[gray]">*No need to incude units at the input.</p>

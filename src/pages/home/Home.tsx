@@ -22,7 +22,6 @@ export function Home() {
     axios
       .get('http://localhost:8080/list')
       .then((data) =>{
-        console.log(data)
         setData(data?.data)
       })
       .catch((e) => console.log(e?.response?.data));

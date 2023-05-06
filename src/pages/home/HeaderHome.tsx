@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 
 export function HeaderHome() {
   const navigation = useNavigate();
-  console.log(navigation);
+  
   return (
     <div className="sm:flex sm:items-center sm:justify-between sm:m-[20px] sm:p-[20px] sm:border-b-[1px] sm:border-b-black">
       <div>
@@ -26,7 +26,7 @@ export function HeaderHome() {
             sm:active:shadow-none"
           type="button"
           onClick={() => {
-            navigation('Add');
+            navigation('add');
           }}
         >Add</button>
 

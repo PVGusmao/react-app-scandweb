@@ -1,14 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { IMyContext, MyContext } from "../../context/MyContext";
 
-export interface IDVDattribute {
-  size: string;
-}
-
 export function DVDParameter() {
   const [size, setSize] = useState('');
 
-  const { attribute, setAttribute } = useContext(MyContext) as IMyContext;
+  const { setAttribute } = useContext(MyContext) as IMyContext;
 
   useEffect(() => {
     setAttribute({size});

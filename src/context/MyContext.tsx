@@ -2,17 +2,23 @@ import { createContext, useState } from "react";
 
 import { IData } from "../pages/home/Home";
 
-import { IDVDattribute } from "../components/DVDParameter/DVDParamenter";
-import { IBookattribute } from "../components/BookParameter/BookParamenter";
-import { IDimensions } from "../components/FurnitureParameter/FurnitureParameter";
+export interface IAttribute {
+  weight?: string;
+  size?: string;
+  height?: string;
+  length?: string;
+  width?: string;
+}
 
 export type IMyContext = {
   data: IData[];
   sku: string;
   name:string;
   price: number;
-  attribute: IDimensions | IDVDattribute |  IBookattribute;
-  setAttribute: React.Dispatch<React.SetStateAction<IDimensions | IDVDattribute>>;
+  attribute: IAttribute;
+  selectValue: string;
+  setSelectValue: React.Dispatch<React.SetStateAction<string>>;
+  setAttribute: React.Dispatch<React.SetStateAction<IAttribute>>;
   setData: React.Dispatch<React.SetStateAction<IData[]>>;
   setSku: React.Dispatch<React.SetStateAction<string>>;
   setName: React.Dispatch<React.SetStateAction<string>>;
@@ -27,12 +33,14 @@ type Props = {
 
 export function MyProvider({ children }: Props) {
   const [data, setData] = useState<IData[]>([]);
-
+  
   const [sku, setSku] = useState<string>('');
   const [name, setName] = useState<string>('');
-  const [price, setPrice] = useState<number>();
-  
-  const [attribute, setAttribute] = useState<IDimensions | IDVDattribute | IBookattribute>();
+  const [price, setPrice] = useState<number>(0);
+
+  const [selectValue, setSelectValue] = useState<string>('');
+
+  const [attribute, setAttribute] = useState<IAttribute>({});
 
   return (
     <MyContext.Provider value={{
@@ -41,6 +49,7 @@ export function MyProvider({ children }: Props) {
       name, setName,
       price, setPrice,
       attribute, setAttribute,
+      selectValue, setSelectValue,
     } as IMyContext}>
       {children}
     </MyContext.Provider>

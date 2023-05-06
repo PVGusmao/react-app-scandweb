@@ -4,9 +4,8 @@ import { DynamicTypeParameters } from "../../components/DynamicTypeParameters/Dy
 import { IMyContext, MyContext } from "../../context/MyContext";
 
 export function BodyAddProduct() {
-  const {sku, name, price, setName, setPrice, setSku} = useContext(MyContext) as IMyContext;
+  const {sku, name, price, selectValue, setSelectValue, setName, setPrice, setSku} = useContext(MyContext) as IMyContext;
 
-  const [selectValue, setSelectValue] = useState('');
   const [selectError, setSelectError] = useState('');
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
@@ -30,8 +29,6 @@ export function BodyAddProduct() {
           onChange={(e) => setSku(e?.target.value)}
         />
 
-        <p>{sku}</p>
-
         <input
           id="name"
           className="sm:border-black sm:border-[1px] sm:p-[10px] sm:w-[300px] sm:mb-[10px]"
@@ -40,8 +37,6 @@ export function BodyAddProduct() {
           value={name}
           onChange={(e) => setName(e?.target.value)}
         />
-
-        <p>{name}</p>
 
         <input
           id="price"
@@ -61,9 +56,9 @@ export function BodyAddProduct() {
           onChange={handleChange}
           defaultValue={'select'}
         >
-          <option value="select" disabled selected>Select an option</option>
+          <option value="select" disabled>Select an option</option>
           <option value="dvd">DVD</option>
-          <option value="furniture" selected>Furniture</option>
+          <option value="furniture">Furniture</option>
           <option value="book">Book</option>
         </select>
 

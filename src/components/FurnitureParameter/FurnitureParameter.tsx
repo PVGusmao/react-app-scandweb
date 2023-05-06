@@ -1,12 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { IMyContext, MyContext } from "../../context/MyContext";
 
-export interface IDimensions {
-  height: string;
-  length: string;
-  width: string;
-}
-
 export function FurnitureParameter() {
   const { setAttribute } = useContext(MyContext) as IMyContext;
 

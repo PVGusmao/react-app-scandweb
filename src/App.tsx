@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Home } from './pages/home/Home';
 import { AddProduct } from './pages/addProduct/AddProduct';
+
 import { Footer } from './components/Footer/Footer';
 
 function App() {
