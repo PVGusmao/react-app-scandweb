@@ -22,7 +22,10 @@ export function Home() {
   async function getAllProducts() {
     axios
       .get('http://localhost:8080/list')
-      .then((data) => setData(data?.data))
+      .then((data) =>{
+        console.log(data)
+        setData(data?.data)
+      })
       .catch((e) => console.log(e?.response?.data));
   }
 
