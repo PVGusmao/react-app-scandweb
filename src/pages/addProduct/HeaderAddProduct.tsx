@@ -3,15 +3,16 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { IMyContext, MyContext } from "../../context/MyContext";
+import axios from "axios";
 
 export function HeaderAddProduct() {
-  const {sku, name, price, attribute, selectValue} = useContext(MyContext) as IMyContext;
+  const {sku, name, price, attribute, selectValue, setSku, setName, setPrice, setAttribute, setSelectValue} = useContext(MyContext) as IMyContext;
 
   const navigation = useNavigate();
 
   function isAddButtonDisabled():boolean {
-    if (sku?.length > 0
-      && name?.length > 0
+    if (sku?.length >= 3
+      && name?.length >= 3
       && selectValue?.length > 0
       && Object.keys(attribute)?.length > 0
       ) {
@@ -25,7 +26,7 @@ export function HeaderAddProduct() {
     const obj = {
       sku,
       name,
-      price: `$ ${price}`,
+      price: `${price}`,
       type: selectValue === 'dvd'
         ? 'size' : selectValue === 'book'
         ? 'weight'
@@ -37,7 +38,19 @@ export function HeaderAddProduct() {
         : `${attribute?.height}x${attribute?.width}x${attribute?.length} CM`,
     }
 
+    axios
+      .post('http://localhost:8080/create', obj)
+      .then((response) => console.log(response))
+      .catch((e) => console.log(e))
+
+    setSku('');
+    setName('');
+    setPrice(0);
+    setAttribute({});
+    setSelectValue('');
+
     console.log(obj);
+
     return obj;
   }
 
@@ -66,7 +79,7 @@ export function HeaderAddProduct() {
             disabled={isAddButtonDisabled()}
           type="button"
           onClick={() => {
-            // navigation('AddProduct');
+            navigation('/');
             mountBodyObject();
           }}
         >Save</button>

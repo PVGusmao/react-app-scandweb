@@ -3,6 +3,7 @@ import { IMyContext, MyContext } from "../../context/MyContext";
 
 export function DVDParameter() {
   const [size, setSize] = useState('');
+  const [text, setText] = useState('');
 
   const { setAttribute } = useContext(MyContext) as IMyContext;
 
@@ -19,7 +20,13 @@ export function DVDParameter() {
         name="size"
         value={size}
         onChange={(e) => setSize(e?.target?.value)}
+        onFocus={() => !size && setText('*Should fill in the fild above.')}
       />
+
+      {
+        !size && <p className="sm:text-[red] sm:my-[5px] sm:text-[12px]">{text}</p>
+      }
+
 
       <p className="sm:text-[12px] sm:mb-[10px] sm:text-[gray]">*No need to incude units at the input.</p>
       <p className="sm:text-[14px] sm:font-bold">This is size of the DVD, the capacity of saving data.</p>
