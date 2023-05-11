@@ -10,23 +10,11 @@ type Props = {
   setError: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function HeaderAddProduct({ error, setError }: Props) {
+export function HeaderAddProduct({ setError }: Props) {
   const {sku, name, price, attribute, selectValue,
     setSku, setName, setPrice, setAttribute, setSelectValue} = useContext(MyContext) as IMyContext;
 
   const navigation = useNavigate();
-
-  function isAddButtonDisabled():boolean {
-    if (sku?.length >= 3
-      && name?.length >= 3
-      && selectValue?.length > 0
-      && Object.keys(attribute)?.length > 0
-      ) {
-        return false;
-      }
-
-    return true;
-  }
 
   function mountBodyObject() {
     if (sku?.length >= 3
@@ -52,7 +40,7 @@ export function HeaderAddProduct({ error, setError }: Props) {
         let value = '';
     
         axios
-          .post('http://10.0.0.22:8080/create', obj)
+          .post('http://10.0.0.22:8080/addproduct', obj)
           .then((response) => {
             console.log(response)
             value = '';
@@ -100,7 +88,6 @@ export function HeaderAddProduct({ error, setError }: Props) {
             sm:shadow-black
             sm:active:shadow-none
             sm:cursor-pointer"
-            // disabled={isAddButtonDisabled()}
           type="button"
           onClick={() => {
             mountBodyObject() ? window.alert('All fields are mandatory, please submit required data.') : mountBodyObject();

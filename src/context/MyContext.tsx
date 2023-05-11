@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 
 import { IData } from "../pages/home/Home";
+import { AxiosRequestConfig } from "axios";
 
 export interface IAttribute {
   weight?: string;
@@ -17,6 +18,8 @@ export type IMyContext = {
   price: number;
   attribute: IAttribute;
   selectValue: string;
+  idCards: number[]
+  setIdCards: React.Dispatch<React.SetStateAction<number[]>>;
   setSelectValue: React.Dispatch<React.SetStateAction<string>>;
   setAttribute: React.Dispatch<React.SetStateAction<IAttribute>>;
   setData: React.Dispatch<React.SetStateAction<IData[]>>;
@@ -37,11 +40,13 @@ export function MyProvider({ children }: Props) {
   const [sku, setSku] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [price, setPrice] = useState<number>(0);
-
+  
   const [selectValue, setSelectValue] = useState<string>('');
-
+  
   const [attribute, setAttribute] = useState<IAttribute>({});
-
+  
+  const [idCards, setIdCards] = useState<number[]>([]);
+  
   return (
     <MyContext.Provider value={{
       data, setData,
@@ -50,6 +55,7 @@ export function MyProvider({ children }: Props) {
       price, setPrice,
       attribute, setAttribute,
       selectValue, setSelectValue,
+      idCards, setIdCards,
     } as IMyContext}>
       {children}
     </MyContext.Provider>

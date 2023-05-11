@@ -20,7 +20,7 @@ export function Home() {
 
   async function getAllProducts() {
     axios
-      .get('http://10.0.0.22:8080/list')
+      .get('http://10.0.0.22:8080/listall')
       .then((data) =>{
         setData(data?.data)
       })
