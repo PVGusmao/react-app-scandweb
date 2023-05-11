@@ -3,7 +3,11 @@ import { useContext, useState } from "react";
 import { DynamicTypeParameters } from "../../components/DynamicTypeParameters/DynamicTypeParameters";
 import { IMyContext, MyContext } from "../../context/MyContext";
 
-export function BodyAddProduct() {
+type Props = {
+  error: string;
+}
+
+export function BodyAddProduct({ error }: Props) {
   const {sku, name, price, selectValue, setSelectValue, setName, setPrice, setSku} = useContext(MyContext) as IMyContext;
 
   const [selectError, setSelectError] = useState('');
@@ -31,7 +35,9 @@ export function BodyAddProduct() {
         />
 
         {
+          error.length === 0 ?
           sku?.length !== 0 && <p className="sm:text-[red] sm:mb-[10px] sm:text-[12px]">{sku?.length < 3 && '*Should have more then 3 characters.'}</p>
+          : <p className="sm:text-[red] sm:mb-[10px] sm:text-[12px]">{error}</p>
         }
 
         <input

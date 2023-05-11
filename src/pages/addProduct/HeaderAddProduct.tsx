@@ -5,8 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { IMyContext, MyContext } from "../../context/MyContext";
 import axios from "axios";
 
-export function HeaderAddProduct() {
-  const {sku, name, price, attribute, selectValue, setSku, setName, setPrice, setAttribute, setSelectValue} = useContext(MyContext) as IMyContext;
+type Props = {
+  error: string;
+  setError: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function HeaderAddProduct({ error, setError }: Props) {
+  const {sku, name, price, attribute, selectValue,
+    setSku, setName, setPrice, setAttribute, setSelectValue} = useContext(MyContext) as IMyContext;
 
   const navigation = useNavigate();
 
@@ -23,35 +29,53 @@ export function HeaderAddProduct() {
   }
 
   function mountBodyObject() {
-    const obj = {
-      sku,
-      name,
-      price: `${price}`,
-      type: selectValue === 'dvd'
-        ? 'size' : selectValue === 'book'
-        ? 'weight'
-        : 'dimensions',
-      attribute: selectValue === 'dvd'
-        ? `${attribute?.size} MB`
-        : selectValue === 'book'
-        ? `${attribute?.weight} KG`
-        : `${attribute?.height}x${attribute?.width}x${attribute?.length} CM`,
-    }
-
-    axios
-      .post('http://localhost:8080/create', obj)
-      .then((response) => console.log(response))
-      .catch((e) => console.log(e))
-
-    setSku('');
-    setName('');
-    setPrice(0);
-    setAttribute({});
-    setSelectValue('');
-
-    console.log(obj);
-
-    return obj;
+    if (sku?.length >= 3
+      && name?.length >= 3
+      && selectValue?.length > 0
+      && Object.keys(attribute)?.length > 0
+      ) {
+        const obj = {
+          sku,
+          name,
+          price: `${price}`,
+          type: selectValue === 'dvd'
+            ? 'size' : selectValue === 'book'
+            ? 'weight'
+            : 'dimensions',
+          attribute: selectValue === 'dvd'
+            ? `${attribute?.size} MB`
+            : selectValue === 'book'
+            ? `${attribute?.weight} KG`
+            : `${attribute?.height}x${attribute?.width}x${attribute?.length} CM`,
+        }
+    
+        let value = '';
+    
+        axios
+          .post('http://10.0.0.22:8080/create', obj)
+          .then((response) => {
+            console.log(response)
+            value = '';
+            setError('');
+          })
+          .catch((e) => {
+            console.log(e?.response?.data?.message)
+            value = e?.response?.data?.message;
+            setError(e?.response?.data?.message);
+          }).finally(() => {
+            if (value.length === 0) {
+              setSku('');
+              setName('');
+              setPrice(0);
+              setAttribute({});
+              setSelectValue('');
+    
+              navigation('/');
+            }
+          })
+        return false;
+      }
+    return true;
   }
 
   return (
@@ -76,11 +100,10 @@ export function HeaderAddProduct() {
             sm:shadow-black
             sm:active:shadow-none
             sm:cursor-pointer"
-            disabled={isAddButtonDisabled()}
+            // disabled={isAddButtonDisabled()}
           type="button"
           onClick={() => {
-            navigation('/');
-            mountBodyObject();
+            mountBodyObject() ? window.alert('All fields are mandatory, please submit required data.') : mountBodyObject();
           }}
         >Save</button>
 
@@ -97,6 +120,15 @@ export function HeaderAddProduct() {
             sm:active:shadow-none
             sm:cursor-pointer"
           type="button"
+          onClick={() => {
+            setSku('');
+            setName('');
+            setPrice(0);
+            setAttribute({});
+            setSelectValue('');
+
+            navigation('/');
+          }}
         >Cancel</button>
       </div>
     </div>

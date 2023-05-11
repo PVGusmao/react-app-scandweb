@@ -26,7 +26,7 @@ export function HeaderHome() {
             sm:active:shadow-none"
           type="button"
           onClick={() => {
-            navigation('add');
+            navigation('addproduct');
           }}
         >Add</button>
 
