@@ -35,7 +35,7 @@ export function BodyAddProduct({ error }: Props) {
         />
 
         {
-          error.length === 0 ?
+          error && error.length === 0 ?
           sku?.length !== 0 && <p className="sm:text-[red] sm:mb-[10px] sm:text-[12px]">{sku?.length < 3 && '*Should have more then 3 characters.'}</p>
           : <p className="sm:text-[red] sm:mb-[10px] sm:text-[12px]">{error}</p>
         }

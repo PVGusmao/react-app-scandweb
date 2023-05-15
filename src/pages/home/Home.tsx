@@ -20,8 +20,9 @@ export function Home() {
 
   async function getAllProducts() {
     axios
-      .get('http://10.0.0.22:8080/listall')
-      .then((data) =>{
+      .get('http://154.49.246.128:3000/listall')
+      .then((data) => {
+        console.log(data);
         setData(data?.data)
       })
       .catch((e) => console.log(e?.response?.data));

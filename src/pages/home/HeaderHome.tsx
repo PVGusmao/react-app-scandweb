@@ -12,7 +12,7 @@ export function HeaderHome() {
   const navigation = useNavigate();
 
   function massDelete() {
-    axios.delete(`http://10.0.0.22:8080/removeproducts`, {data: { id: idCards}})
+    axios.delete(`http://154.49.246.128:3000/removeproducts`, {data: { id: idCards}})
       .then((response) => console.log(response))
       .catch((e) => console.log(e.response))
       .finally(() => {
@@ -38,8 +38,8 @@ export function HeaderHome() {
       <div className="sm:flex sm:items-center sm:justify-evenly sm:w-[300px]">
         <button
           className="
-            sm:w-[100px]
-            sm:h-[40px]
+            sm:w-[120px]
+            sm:h-[50px]
             sm:border-black
             sm:border-[1px]
             sm:rounded-[3px]
@@ -50,13 +50,13 @@ export function HeaderHome() {
           onClick={() => {
             navigation('addproduct');
           }}
-        >Add</button>
+        >ADD</button>
 
         <button
           id="delete-product-btn"
           className="
-            sm:w-[100px]
-            sm:h-[40px]
+            sm:w-[120px]
+            sm:h-[50px]
             sm:border-black
             sm:border-[1px]
             sm:rounded-[3px]
@@ -67,7 +67,7 @@ export function HeaderHome() {
           onClick={() => {
             massDelete();
           }}
-        >Mass Delete</button>
+        >MASS DELETE</button>
       </div>
     </div>
   )

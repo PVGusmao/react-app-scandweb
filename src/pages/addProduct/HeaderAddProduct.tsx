@@ -38,9 +38,9 @@ export function HeaderAddProduct({ setError }: Props) {
         }
     
         let value = '';
-    
+
         axios
-          .post('http://10.0.0.22:8080/addproduct', obj)
+          .post('http://154.49.246.128:3000/addproduct', obj)
           .then((response) => {
             console.log(response)
             value = '';
